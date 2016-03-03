@@ -4,7 +4,7 @@
 
 \author[Packer]{Packer Collegiate Institute\\Dr. Anthony Schultz}
 
-%\date{28 March 2010} % without \date command, current date is supplied
+\date{March 4 2016} % without \date command, current date is supplied
 
 %\geometry{showframe} % display margins for debugging page layout
 
@@ -99,9 +99,9 @@ The word \textbf{hash} entered English in the mid 1600's, during the dawn of sci
 \end{marginfigure}
 
 
-Hashing is the systematic process of adding entropy to an object in a repeatable but irreversible way.  A cryptographic hash function works like the culinary technique.  It chops up numbers, any data, into a random scramble.  The process is computationally irreversible but fully deterministic and repeatable.  \\
+Hashing is the systematic process of adding entropy to number/data in a repeatable but irreversible and unpredictable way.  A cryptographic hash function works like the culinary technique.  It chops up numbers, any data, into a random scramble.  The process is computationally irreversible but fully deterministic and repeatable.  \\
 
-\marginnote[30pt]{A good hash function is a method of randomizing numbers so that no two inputs ever produce the same output.  That is a collision.  It is bad.  Very bad.}
+\marginnote[30pt]{A good hash function is a method of randomizing numbers so that no two inputs ever produce the same output.  Such an occurrence is called is a collision.  It is bad, very bad.}
 A hash function maps a number $X$ to another number $Y$.
 $$\text{Hash}(X)\longrightarrow Y$$
 There is no reverse mapping or "un-hashing."  
@@ -109,11 +109,11 @@ $$X\mathrlap{\longleftarrow}{\ \ \Large \times}\ \  \text{Hash}^{-1}(Y)$$
 A hash function is a non-invertible function.
 
 \section{SHA2}
-SHA-2 (Secure Hash Algorithm 2) is a set of cryptographic hash functions designed by the NSA. SHA stands for Secure Hash Algorithm. SHA-256 and SHA-512 are novel hash functions computed with 32-bit and 64-bit words, respectively. They use different shift amounts and additive constants, but their structures are otherwise virtually identical, differing only in the number of rounds.
+SHA-2 (Secure Hash Algorithm 2) is a set of cryptographic hash functions designed by the NSA. SHA stands for Secure Hash Algorithm. SHA-256 and SHA-512 are novel hash functions.  They use different shift amounts and additive constants, but their structures are otherwise virtually identical, differing only in the number of rounds.
 
-The SHA-2 hash function is implemented in some widely used security applications and protocols, including TLS and SSL, PGP, SSH, S/MIME, and IPsec.
+The SHA-256 hash function is implemented in some widely used security applications and protocols, including TLS and SSL, PGP, SSH, S/MIME, and IPsec.
 
-SHA-256 returns a 64 digit, base 16 number.   The SHA-256 hash of the string "SHA-2 Electric Boogaloo" returns the following:\\
+SHA-256 returns a 64 digit, base 16 hexadecimal number.   The SHA-256 hash of the string "SHA-2 Electric Boogaloo" returns the following:\\
 \vspace{0.5cm}
 \noindent6f1dceb60c1e2251379c78059a07ec98d6ac368ee2f115c020d753158b16617c
 
@@ -124,7 +124,7 @@ SHA-256 returns a 64 digit, base 16 number.   The SHA-256 hash of the string "SH
 \end{marginfigure}
 
 \section{Hashing in Python}
-\marginnote[20pt]{Hexidecimal or hex numbers are base 16.  The numerals are written:
+\marginnote[20pt]{Hexadecimal or hex numbers are base 16.  The numerals are written:
 $$\texttt{01234567890abdef}$$}
 At the command line type the following to get a python shell open.
 \small
@@ -134,7 +134,7 @@ $ python
 \end{verbatim}
 \end{shaded}
 \normalsize
-Once the python shell is open import the hash library and hash a test message.
+Once the python shell is open, import the hash library and hash a test message.
 \marginnote[-20pt]{The SHA-256 output is 64 digits.  Since the output is hex there are $16^{64}$ possible numbers.  This is on the order of the number of atoms in the whole universe.}
 \small
 \begin{shaded}
@@ -146,7 +146,7 @@ Once the python shell is open import the hash library and hash a test message.
 '3e3d6a28351293395ba3a345e79593de3780723a42321204c54b7da49bf3da45'
 \end{verbatim}
 \end{shaded}
-\marginnote[-60pt]{Note that the hash of "testing" and "testing1" is completely different despite the small difference of the input.  This quality is known as entropy.}
+\marginnote[-60pt]{Note that the hash of "testing" and \\ \noindent "testing1" is completely different despite the small difference of the input.}
 \normalsize
 This code shows how to hash a file.  This particular program, named "hasher.py" hashes itself.
 \small
@@ -210,7 +210,7 @@ a37d71db6c43c3650ade82ccac7107bad8c268a9b94d03e36d6895eb2edbdd99
 
 \marginnote[15pt]{
 \textbf{Mining}\\
-\noindent The process of Bitcoin mining takes bitcoin transaction data and hashes it.   The miner who discovers a hash with a sufficient number of leading zeros wins a bitcoin prize.  The set of transactions that are hashed together constitute a block.  The transactions are hashed with the previous prize-winning hash and a random number called a "nonce."  The inclusion of the previous block hash order the blocks in time as a sort of chain.  This data structure is called a blockchain.}
+\noindent The process of Bitcoin mining takes bitcoin transaction data and hashes it.   The miner who discovers a hash with a sufficient number of leading zeros wins a bitcoin prize.  The set of transactions that are hashed together constitute a block.  The transactions are hashed with the previous prize-winning hash and a random number called a "nonce."  The inclusion of the previous block hash orders the blocks in time as a chain of hashes.  This data structure is called a blockchain.}
 
 \marginnote[15pt]{
 \textbf{Digital Fingerprinting}\\
@@ -270,11 +270,11 @@ print hashe
   \label{fig:marginfig}
 \end{marginfigure}
 
-Imagine we want to develop an email protocol that will block spam.  One solution to this problem is only to accept email messages which show work.  Spammers send out millions of messages at a time because they can.  If sending an email required some computational work the cost would make it prohibitive for spammers to send out millions of spam emails.  \\
-The above code implements such a protocol.  Imagine only message whose hash has a sufficient number of leading zeros are accepted by the recipient server.  In the code the variable \texttt{num} determines the number of leading zeros required.  Notice the higher this number the longer it takes to generate an acceptable method.  The nonce value allow the sender to change the hash output without changing the recipient or message content. \footnote{This type of proof-of-work email system was proposed in May 1997 by Adam Back under the name Hashcash.}
+Imagine we want to develop an email protocol that will block spam.  One solution to this problem is only to accept email messages which show sufficient work.  Spammers send out millions of messages at a time because they can, email is cheap.  If sending an email required some computational work the cost would make it prohibitive for spammers to send out millions of spam emails.  \\
+The above code implements such a protocol.  Imagine only message whose hash has a sufficient number of leading zeros are accepted by the recipient server.  In the code the variable \texttt{num} determines the number of leading zeros required.  Notice the higher this number is set, the longer it takes to generate an acceptable message.  The nonce value allows the sender to change the hash output without changing the recipient or message content. \footnote{This type of proof-of-work email system was proposed in May 1997 by Adam Back under the project name Hashcash.}
 
 \section{Proof of Existence of Our Spam Filter}
-Imagine that we want to protect our intellectual property for our spam fighting email system.  We hay take the hash of 
+Imagine that we want to protect our intellectual property for our spam fighting email system.  We hay take the hash of the file "email.py".
 
 \small
 \begin{framed}
@@ -309,7 +309,7 @@ It will output the following:
 
 
 \normalsize
-As a unique identifier for the file "email.py" the hash may be used as a proof of existence for the file without revealing the file itself.  All that is required is a trusted timestamp.  We could seal this in an envelope and mail it to ourselves.  The postmark can serve as a timestamp.  Another option is that we could take out an add in the New York Times, our trusted paper of record.  The recording of the hash in the paper can be proof at a later date that the hash existed and thus the file existed.\\
+As a unique identifier for the file "email.py" the hash may be used as a proof of existence for the file without revealing the file itself.  All that is required is a trusted timestamp.  We could seal this in an envelope and mail it to ourselves.  The postmark could serve as a trusted timestamp.  Another option is that we could take out an add out in the New York Times, our trusted paper of record.  The recording of the hash in the paper could be proof, at a later date, that the hash existed and thus the file existed.\\
 Another interesting solution is to take the hash value and encode it in a transaction in a blockchain.  This has been done for this file.\footnote{\href{url}{https://goo.gl/ULQwKD}}
 
 
